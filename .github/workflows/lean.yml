@@ -1,0 +1,15 @@
+name: Lean
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Baixa o cache oficial do Mathlib e roda `lake build`.
+      # ClayNavierStokes.lean importa ClayNavierStokes/Audit.lean: se algum `#print axioms` mudar, o build falha.
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
